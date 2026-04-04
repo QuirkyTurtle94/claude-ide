@@ -2,7 +2,18 @@
 set -euo pipefail
 
 SESSION="claude-ide"
-DIR="${1:-.}"
+DSP=""
+DIR=""
+
+# Parse arguments
+for arg in "$@"; do
+    case "$arg" in
+        --dsp) DSP="--dangerously-skip-permissions" ;;
+        *) DIR="$arg" ;;
+    esac
+done
+
+DIR="${DIR:-.}"
 DIR="$(cd "$DIR" && pwd)"
 
 # If session exists, attach and exit
@@ -26,7 +37,7 @@ tmux split-window -v -l 50% -t "$SESSION" -c "$DIR"
 
 # Go back to center pane and launch Claude
 tmux select-pane -t "$SESSION:.1"
-tmux send-keys -t "$SESSION" "claude --dangerously-skip-permissions" Enter
+tmux send-keys -t "$SESSION" "claude $DSP" Enter
 
 # Attach
 exec tmux attach-session -t "$SESSION"
