@@ -9,6 +9,19 @@ DIR=""
 for arg in "$@"; do
     case "$arg" in
         --dsp) DSP="--dangerously-skip-permissions" ;;
+        -h|--help)
+            echo "Usage: claude-ide [DIR] [OPTIONS]"
+            echo ""
+            echo "Launch a tmux IDE session with yazi, Claude Code, and two terminal panes."
+            echo ""
+            echo "Arguments:"
+            echo "  DIR          Working directory (default: current directory)"
+            echo ""
+            echo "Options:"
+            echo "  --dsp        Launch Claude with --dangerously-skip-permissions"
+            echo "  -h, --help   Show this help message"
+            exit 0
+            ;;
         *) DIR="$arg" ;;
     esac
 done
