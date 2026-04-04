@@ -21,8 +21,7 @@ tmux send-keys -t "$SESSION" "yazi '$DIR'" Enter
 tmux select-pane -t "$SESSION:.1"
 tmux split-window -h -l 35% -t "$SESSION" -c "$DIR"
 
-# Now in the right column, split for lazygit (top) and terminal (bottom)
-tmux send-keys -t "$SESSION" "lazygit" Enter
+# Split right column into two terminal panes
 tmux split-window -v -l 50% -t "$SESSION" -c "$DIR"
 
 # Go back to center pane and launch Claude

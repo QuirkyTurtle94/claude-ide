@@ -4,29 +4,27 @@ A tmux script that turns your terminal into a Claude-powered IDE with a 3-column
 
 ```
 ┌──────────┬──────────────────┬──────────────┐
-│          │                  │   lazygit    │
+│          │                  │  terminal 1  │
 │   yazi   │   Claude Code    ├──────────────┤
-│  (~15%)  │    (~55%)        │   terminal   │
+│  (~15%)  │    (~55%)        │  terminal 2  │
 │          │                  │   (~30%)     │
 └──────────┴──────────────────┴──────────────┘
 ```
 
 - **Left**: [yazi](https://github.com/sxyazi/yazi) file browser
 - **Center**: [Claude Code](https://github.com/anthropics/claude-code) (main pane)
-- **Right top**: [lazygit](https://github.com/jesseduffield/lazygit) for git management
-- **Right bottom**: Shell for running commands
+- **Right**: Two shell panes for running commands
 
 ## Prerequisites
 
 - [tmux](https://github.com/tmux/tmux)
 - [Claude Code](https://github.com/anthropics/claude-code)
 - [yazi](https://github.com/sxyazi/yazi)
-- [lazygit](https://github.com/jesseduffield/lazygit)
 
 ### macOS (Homebrew)
 
 ```bash
-brew install tmux yazi lazygit
+brew install tmux yazi
 npm install -g @anthropic-ai/claude-code
 ```
 
@@ -63,7 +61,7 @@ If a `claude-ide` tmux session already exists, it reattaches to it.
 | Alt+Arrow keys | Navigate between panes |
 | Alt+z | Zoom/unzoom current pane |
 | Prefix+d | Detach from session |
-| q | Quit yazi or lazygit |
+| q | Quit yazi |
 
 ## License
 
