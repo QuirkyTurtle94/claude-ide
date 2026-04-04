@@ -39,6 +39,14 @@ cp claude-ide ~/bin/claude-ide
 chmod +x ~/bin/claude-ide
 ```
 
+A reference `tmux.conf` is included with the recommended keybindings and navigation bar. Copy it or append to your existing config:
+
+```bash
+cp tmux.conf ~/.tmux.conf        # fresh install
+cat tmux.conf >> ~/.tmux.conf    # append to existing
+tmux source ~/.tmux.conf         # reload
+```
+
 ## Usage
 
 ```bash
@@ -48,20 +56,14 @@ claude-ide ~/my-project # specify a project directory
 
 If a `claude-ide` tmux session already exists, it reattaches to it.
 
-## Recommended tmux keybindings
+## Keybindings
 
-Add these to your `~/.tmux.conf` for easy pane navigation:
-
-```tmux
-# Pane navigation (Alt+Arrow, no prefix needed)
-bind -n M-Left select-pane -L
-bind -n M-Right select-pane -R
-bind -n M-Up select-pane -U
-bind -n M-Down select-pane -D
-
-# Zoom toggle (Alt+z)
-bind -n M-z resize-pane -Z
-```
+| Key | Action |
+|-----|--------|
+| Alt+Arrow keys | Navigate between panes |
+| Alt+z | Zoom/unzoom current pane |
+| Prefix+d | Detach from session |
+| q | Quit yazi or lazygit |
 
 ## License
 
