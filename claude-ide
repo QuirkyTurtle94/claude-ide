@@ -13,13 +13,13 @@ fi
 # Create session with the center pane (Claude Code)
 tmux new-session -d -s "$SESSION" -c "$DIR" -x "$(tput cols)" -y "$(tput lines)"
 
-# Split left pane for yazi (~15% width)
-tmux split-window -h -b -l 15% -t "$SESSION" -c "$DIR"
+# Split left pane for yazi (~33% width)
+tmux split-window -h -b -l 33% -t "$SESSION" -c "$DIR"
 tmux send-keys -t "$SESSION" "yazi '$DIR'" Enter
 
-# Select the right (main) pane and split right column (~35% of total width)
+# Select the right (main) pane and split right column (~50% of remaining = 33% of total)
 tmux select-pane -t "$SESSION:.1"
-tmux split-window -h -l 35% -t "$SESSION" -c "$DIR"
+tmux split-window -h -l 50% -t "$SESSION" -c "$DIR"
 
 # Split right column into two terminal panes
 tmux split-window -v -l 50% -t "$SESSION" -c "$DIR"
