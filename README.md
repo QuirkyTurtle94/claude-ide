@@ -58,9 +58,9 @@ If a `claude-ide` tmux session already exists, it reattaches to it.
 
 | Key | Action |
 |-----|--------|
-| Alt+h/j/k/l | Navigate between panes (vim-style) |
-| Alt+z | Zoom/unzoom current pane |
-| Prefix+d | Detach from session |
+| Mouse click | Switch between panes |
+| Ctrl+b, : | tmux command prompt (type `kill-session` to exit) |
+| Ctrl+b, d | Detach from session |
 | q | Quit yazi |
 
 ## License
