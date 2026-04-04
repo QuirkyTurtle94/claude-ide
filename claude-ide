@@ -26,7 +26,7 @@ tmux split-window -v -l 50% -t "$SESSION" -c "$DIR"
 
 # Go back to center pane and launch Claude
 tmux select-pane -t "$SESSION:.1"
-tmux send-keys -t "$SESSION" "claude" Enter
+tmux send-keys -t "$SESSION" "claude --dangerously-skip-permissions" Enter
 
 # Attach
 exec tmux attach-session -t "$SESSION"
