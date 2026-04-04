@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SESSION="claude-ide"
+DIR="${1:-.}"
+DIR="$(cd "$DIR" && pwd)"
+
+# If session exists, attach and exit
+if tmux has-session -t "$SESSION" 2>/dev/null; then
+    exec tmux attach-session -t "$SESSION"
+fi
+
+# Create session with the center pane (Claude Code)
+tmux new-session -d -s "$SESSION" -c "$DIR" -x "$(tput cols)" -y "$(tput lines)"
+
+# Split left pane for yazi (~15% width)
+tmux split-window -h -b -l 15% -t "$SESSION" -c "$DIR"
+tmux send-keys -t "$SESSION" "yazi '$DIR'" Enter
+
+# Select the right (main) pane and split right column (~35% of total width)
+tmux select-pane -t "$SESSION:.1"
+tmux split-window -h -l 35% -t "$SESSION" -c "$DIR"
+
+# Now in the right column, split for lazygit (top) and terminal (bottom)
+tmux send-keys -t "$SESSION" "lazygit" Enter
+tmux split-window -v -l 50% -t "$SESSION" -c "$DIR"
+
+# Go back to center pane and launch Claude
+tmux select-pane -t "$SESSION:.1"
+tmux send-keys -t "$SESSION" "claude" Enter
+
+# Attach
+exec tmux attach-session -t "$SESSION"
