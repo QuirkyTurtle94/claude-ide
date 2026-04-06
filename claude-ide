@@ -39,7 +39,7 @@ tmux new-session -d -s "$SESSION" -c "$DIR" -x "$(tput cols)" -y "$(tput lines)"
 
 # Split left pane for yazi (~33% width)
 tmux split-window -h -b -l 33% -t "$SESSION" -c "$DIR"
-tmux send-keys -t "$SESSION" "yazi '$DIR'" Enter
+tmux send-keys -t "$SESSION" "yazi --show-hidden '$DIR'" Enter
 
 # Select the right (main) pane and split right column (~50% of remaining = 33% of total)
 tmux select-pane -t "$SESSION:.1"
