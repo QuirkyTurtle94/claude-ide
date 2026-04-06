@@ -41,15 +41,19 @@ tmux new-session -d -s "$SESSION" -c "$DIR" -x "$(tput cols)" -y "$(tput lines)"
 tmux split-window -h -b -l 33% -t "$SESSION" -c "$DIR"
 tmux send-keys -t "$SESSION" "yazi --show-hidden '$DIR'" Enter
 
-# Select the right (main) pane and split right column (~50% of remaining = 33% of total)
-tmux select-pane -t "$SESSION:.1"
+# Split left column: lazygit on bottom half
+tmux split-window -v -l 50% -t "$SESSION:.0" -c "$DIR"
+tmux send-keys -t "$SESSION" "lazygit" Enter
+
+# Select the center (main) pane and split right column (~50% of remaining = 33% of total)
+tmux select-pane -t "$SESSION:.2"
 tmux split-window -h -l 50% -t "$SESSION" -c "$DIR"
 
 # Split right column into two terminal panes
 tmux split-window -v -l 50% -t "$SESSION" -c "$DIR"
 
 # Go back to center pane and launch Claude
-tmux select-pane -t "$SESSION:.1"
+tmux select-pane -t "$SESSION:.2"
 tmux send-keys -t "$SESSION" "claude $DSP" Enter
 
 # Attach
